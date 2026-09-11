@@ -29,8 +29,11 @@ public class TransacaoService {
         transacaoRepository.salvar(transacao);
     }
 
-    // Helpers
+    public void limparTransacoes() {
+        transacaoRepository.limparTransacoes();
+    }
 
+    // Helpers
     private void validaValor(double valor) {
         if (valor < 0) {
             throw new InvalidTransactionException();

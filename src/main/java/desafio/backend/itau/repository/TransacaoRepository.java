@@ -18,4 +18,8 @@ public class TransacaoRepository {
         );
     }
 
+    public void limparTransacoes() {
+        transacoes.clear();
+    }
+
 }
