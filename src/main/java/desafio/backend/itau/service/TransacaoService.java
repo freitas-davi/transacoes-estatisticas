@@ -3,8 +3,8 @@ package desafio.backend.itau.service;
 import desafio.backend.itau.domain.Transacao;
 import desafio.backend.itau.dto.TransacaoRequestDTO;
 import desafio.backend.itau.exception.InvalidTransactionException;
+import desafio.backend.itau.interfaces.TransacaoRepository;
 import desafio.backend.itau.mapper.TransacaoMapper;
-import desafio.backend.itau.repository.TransacaoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -30,10 +30,10 @@ public class TransacaoService {
     }
 
     public void limparTransacoes() {
-        transacaoRepository.limparTransacoes();
+        transacaoRepository.limpar();
     }
 
-    // Helpers
+    // HELPERS
     private void validaValor(double valor) {
         if (valor < 0) {
             throw new InvalidTransactionException();

@@ -21,6 +21,46 @@ API para gerenciamento e estatísticas de transações.
 - **422 Unprocessable Entity (no content)**: Validação falhou
 
 
+---
+
+### Deletar Todas as Transações
+**`DELETE /transacao`**
+
+#### Request
+Sem parâmetros.
+
+#### Response
+- **200 OK**: Lista de transações limpa com sucesso (sem corpo)
+
+---
+
+### Obter Estatísticas
+**`GET /estatistica`**
+
+#### Request
+Sem parâmetros. Retorna estatísticas das transações dos últimos 60 segundos.
+
+#### Response
+**200 OK**
+```json
+{
+  "count": 10,
+  "sum": 1500.75,
+  "avg": 150.075,
+  "min": 50.25,
+  "max": 300.50
+}
+```
+
+**Campos:**
+- `count`: Quantidade de transações
+- `sum`: Somatório dos valores
+- `avg`: Média dos valores
+- `min`: Valor mínimo
+- `max`: Valor máximo
+
+---
+
 ## Regras de Negócio
 
 | Regra | Descrição |
@@ -28,4 +68,17 @@ API para gerenciamento e estatísticas de transações.
 | **Valor** | Não pode ser negativo (valor < 0 retorna erro 422) |
 | **Data/Hora** | Não pode ser no futuro (dataHora > agora retorna erro 422) |
 | **Obrigatoriedade** | Valor e dataHora são campos obrigatórios (ausente retorna erro 422) |
+| **Janela de Tempo** | Estatísticas consideram apenas transações dos últimos 60 segundos |
+
+---
+
+## Decisões Técnicas
+
+### Estrutura de Dados: ConcurrentLinkedQueue
+
+A escolha foi por utilizar `ConcurrentLinkedQueue` ao invés de `ConcurrentHashMap`:
+
+- **ConcurrentHashMap**: Exigiria uma chave única (como UUID) para cada transação, ocupando mais memória
+- **ConcurrentLinkedQueue**: Mantém a ordem de inserção e otimiza a operação de leitura sequencial necessária para calcular estatísticas
+- **Thread-safe**: Ambas são seguras para ambientes multi-thread, mas Queue é mais eficiente para este caso de uso
 
