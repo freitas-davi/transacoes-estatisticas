@@ -1,7 +1,6 @@
-package desafio.backend.itau.interfaces;
+package desafio.backend.itau.repository.interfaces;
 
 import desafio.backend.itau.domain.Transacao;
-
 
 import java.util.Queue;
 

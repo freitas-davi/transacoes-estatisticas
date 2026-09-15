@@ -1,7 +1,7 @@
 package desafio.backend.itau.controller;
 
 import desafio.backend.itau.dto.EstatisticaResponseDTO;
-import desafio.backend.itau.service.EstatisticaService;
+import desafio.backend.itau.service.interfaces.EstatisticaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

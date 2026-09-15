@@ -2,6 +2,8 @@
 
 API para gerenciamento e estatísticas de transações.
 
+Desafio: https://github.com/feltex/desafio-itau-backend
+
 ## Endpoints
 
 ### Criar Transação
@@ -61,18 +63,9 @@ Sem parâmetros. Retorna estatísticas das transações dos últimos 60 segundos
 
 ---
 
-## Regras de Negócio
-
-| Regra | Descrição |
-|-------|-----------|
-| **Valor** | Não pode ser negativo (valor < 0 retorna erro 422) |
-| **Data/Hora** | Não pode ser no futuro (dataHora > agora retorna erro 422) |
-| **Obrigatoriedade** | Valor e dataHora são campos obrigatórios (ausente retorna erro 422) |
-| **Janela de Tempo** | Estatísticas consideram apenas transações dos últimos 60 segundos |
-
----
-
 ## Decisões Técnicas
+
+> Logs: O projeto inclui logs para registro de eventos (info/error)
 
 ### Estrutura de Dados: ConcurrentLinkedQueue
 
