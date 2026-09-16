@@ -4,6 +4,7 @@ import desafio.backend.itau.dto.EstatisticaResponseDTO;
 import desafio.backend.itau.service.interfaces.EstatisticaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,8 +18,11 @@ public class EstatisticaController {
     }
 
     @GetMapping
-    public EstatisticaResponseDTO getEstatisticaService() {
-        return estatisticaService.getEstatistica();
+    public EstatisticaResponseDTO getEstatisticaService(
+            @RequestParam(required = false)
+            Long segundos
+    ) {
+        return estatisticaService.getEstatistica(segundos);
     }
 
 }

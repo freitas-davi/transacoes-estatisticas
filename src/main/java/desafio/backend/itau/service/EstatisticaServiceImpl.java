@@ -26,10 +26,14 @@ public class EstatisticaServiceImpl implements EstatisticaService {
     }
 
     @Override
-    public EstatisticaResponseDTO getEstatistica() {
-        OffsetDateTime dataHoraLimite = OffsetDateTime.now().minusSeconds(60);
+    public EstatisticaResponseDTO getEstatistica(Long segundos) {
 
-        log.info("Calculando estatísticas para transações a partir de: {}", dataHoraLimite);
+        OffsetDateTime dataHoraLimite = OffsetDateTime.now().minusSeconds(
+                segundos != null
+                        ? segundos
+                        : 60);
+
+        log.info("Calculando estatísticas para transações a partir de: {} segundos", dataHoraLimite);
 
         DoubleSummaryStatistics estatisticas =
                 transacaoRepository.findAll().stream()
